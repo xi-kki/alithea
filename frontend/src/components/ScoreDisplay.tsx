@@ -30,43 +30,52 @@ export function ScoreDisplay({ moves, matches, total, combo, score, startTime }:
   const progress = total > 0 ? (matches / total) * 100 : 0;
 
   return (
-    <div className="w-full max-w-lg">
-      {/* Main Stats */}
-      <div className="flex justify-between items-center mb-4">
+    <div className="w-full max-w-lg mb-apple-6">
+      {/* Main Stats - Apple-style grid */}
+      <div className="grid grid-cols-3 gap-apple-4 mb-apple-5">
+        {/* Moves */}
         <div className="text-center">
-          <div className="text-2xl font-bold text-white">{moves}</div>
-          <div className="text-xs text-gray-400">Moves</div>
+          <div className="font-sf-display text-display-xxl font-bold text-white">
+            {moves}
+          </div>
+          <div className="text-caption text-white/40">Moves</div>
         </div>
         
+        {/* Time */}
         <div className="text-center">
-          <div className="text-2xl font-bold text-purple-400">{formatTime(elapsed)}</div>
-          <div className="text-xs text-gray-400">Time</div>
+          <div className="font-sf-display text-display-xxl font-bold text-alithea-accent">
+            {formatTime(elapsed)}
+          </div>
+          <div className="text-caption text-white/40">Time</div>
         </div>
         
+        {/* Score */}
         <div className="text-center">
-          <div className="text-2xl font-bold text-pink-400">{score}</div>
-          <div className="text-xs text-gray-400">Score</div>
+          <div className="score-value text-display-xxl">
+            {score}
+          </div>
+          <div className="text-caption text-white/40">Score</div>
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mb-3">
-        <div className="flex justify-between text-xs text-gray-400 mb-1">
+      {/* Progress Bar - Apple-style */}
+      <div className="mb-apple-4">
+        <div className="flex justify-between text-caption text-white/40 mb-apple-2">
           <span>{matches} / {total} matched</span>
           <span>{Math.round(progress)}%</span>
         </div>
-        <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+        <div className="progress-bar">
           <div
-            className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300"
+            className="progress-bar-fill"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
-      {/* Combo Indicator */}
+      {/* Combo Indicator - Apple-style badge */}
       {combo >= 2 && (
-        <div className="text-center animate-pulse">
-          <span className="text-lg font-bold text-yellow-400">
+        <div className="text-center animate-fade-in">
+          <span className="combo-badge">
             🔥 {combo}x Combo!
           </span>
         </div>

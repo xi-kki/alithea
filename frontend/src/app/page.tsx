@@ -24,53 +24,62 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-alithea-darker via-alithea-dark to-alithea-darker grid-pattern">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-alithea-primary via-alithea-secondary to-alithea-accent bg-clip-text text-transparent">
-              🧠 Alithea
-            </h1>
-            <p className="text-gray-400 text-sm">Will you remember?</p>
+      {/* Header - Apple-style nav */}
+      <header className="sticky top-0 z-50 glass">
+        <div className="container mx-auto px-apple-6 py-apple-4 flex justify-between items-center">
+          <div className="flex items-center gap-apple-3">
+            <span className="text-2xl">🧠</span>
+            <div>
+              <h1 className="font-sf-display text-heading-sm font-semibold text-white">
+                Alithea
+              </h1>
+              <p className="text-caption text-white/50 hidden sm:block">Will you remember?</p>
+            </div>
           </div>
           <WalletButton />
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-apple-6 py-apple-12">
         {gameMode === 'menu' && (
-          <div className="max-w-2xl mx-auto text-center">
-            {/* Hero */}
-            <div className="mb-12">
-              <h2 className="text-5xl md:text-6xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+          <div className="max-w-2xl mx-auto text-center animate-fade-in">
+            {/* Hero Section - Apple style */}
+            <div className="mb-apple-16">
+              <h2 className="font-sf-display text-display font-bold mb-apple-4">
+                <span className="bg-gradient-to-r from-alithea-primary via-alithea-secondary to-alithea-accent bg-clip-text text-transparent">
                   Memory Training
                 </span>
                 <br />
                 <span className="text-white">Arena</span>
               </h2>
-              <p className="text-xl text-gray-400 max-w-lg mx-auto">
+              <p className="font-sf-text text-subheading text-white/60 max-w-lg mx-auto">
                 Train your memory. Prove your skill. Earn your reward.
               </p>
             </div>
 
-            {/* Game Modes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {/* Game Mode Cards - Apple-style */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-apple-5 mb-apple-10">
               {/* Classic Pairs 4x4 */}
               <button
                 onClick={() => setGameMode('4x4')}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 p-[2px] hover:scale-105 transition-all duration-300"
+                className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-primary to-alithea-secondary hover:scale-[1.02] transition-all duration-300"
               >
-                <div className="relative h-full rounded-2xl bg-alithea-dark p-6 text-left">
-                  <div className="text-4xl mb-3">👁️</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Classic Pairs</h3>
-                  <p className="text-gray-400 text-sm mb-4">
+                <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-6 text-left">
+                  <div className="text-4xl mb-apple-3">👁️</div>
+                  <h3 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-2">
+                    Classic Pairs
+                  </h3>
+                  <p className="font-sf-text text-body-sm text-white/50 mb-apple-4">
                     Match 8 pairs of cards. Remember their positions!
                   </p>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded">4×4 Grid</span>
-                    <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded">Beginner</span>
+                  <div className="flex items-center gap-2 text-caption">
+                    <span className="px-2 py-1 bg-alithea-primary/20 text-alithea-primary rounded-apple-full">
+                      4×4 Grid
+                    </span>
+                    <span className="px-2 py-1 bg-alithea-success/20 text-alithea-success rounded-apple-full">
+                      Beginner
+                    </span>
                   </div>
                 </div>
               </button>
@@ -78,57 +87,67 @@ export default function Home() {
               {/* Classic Pairs 6x6 */}
               <button
                 onClick={() => setGameMode('6x6')}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-600 to-cyan-600 p-[2px] hover:scale-105 transition-all duration-300"
+                className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-secondary to-alithea-accent hover:scale-[1.02] transition-all duration-300"
               >
-                <div className="relative h-full rounded-2xl bg-alithea-dark p-6 text-left">
-                  <div className="text-4xl mb-3">🧠</div>
-                  <h3 className="text-xl font-bold text-white mb-2">Challenge Mode</h3>
-                  <p className="text-gray-400 text-sm mb-4">
+                <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-6 text-left">
+                  <div className="text-4xl mb-apple-3">🧠</div>
+                  <h3 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-2">
+                    Challenge Mode
+                  </h3>
+                  <p className="font-sf-text text-body-sm text-white/50 mb-apple-4">
                     Match 18 pairs. Can you handle the pressure?
                   </p>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="px-2 py-1 bg-pink-500/20 text-pink-300 rounded">6×6 Grid</span>
-                    <span className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded">Hard</span>
+                  <div className="flex items-center gap-2 text-caption">
+                    <span className="px-2 py-1 bg-alithea-secondary/20 text-alithea-secondary rounded-apple-full">
+                      6×6 Grid
+                    </span>
+                    <span className="px-2 py-1 bg-alithea-warning/20 text-alithea-warning rounded-apple-full">
+                      Hard
+                    </span>
                   </div>
                 </div>
               </button>
             </div>
 
-            {/* Coming Soon */}
-            <div className="bg-alithea-dark/50 rounded-2xl p-6 border border-white/10">
-              <h3 className="text-lg font-bold text-gray-300 mb-4">🚀 Coming Soon</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="text-gray-500">🔵 Pattern Echo</div>
-                <div className="text-gray-500">🔢 Number Vault</div>
-                <div className="text-gray-500">⭐ Chasing Stars</div>
-                <div className="text-gray-500">🎨 Color Cascade</div>
-                <div className="text-gray-500">📝 Word Chain</div>
-                <div className="text-gray-500">🗺️ Pathfinder</div>
-                <div className="text-gray-500">🥁 Rhythm Recall</div>
-                <div className="text-gray-500">🏆 Tournaments</div>
+            {/* Coming Soon - Apple-style section */}
+            <div className="card-apple p-apple-6 mb-apple-8">
+              <h3 className="font-sf-display text-subheading font-semibold text-white/80 mb-apple-4">
+                🚀 Coming Soon
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-apple-4 text-body-sm">
+                <div className="text-white/40">🔵 Pattern Echo</div>
+                <div className="text-white/40">🔢 Number Vault</div>
+                <div className="text-white/40">⭐ Chasing Stars</div>
+                <div className="text-white/40">🎨 Color Cascade</div>
+                <div className="text-white/40">📝 Word Chain</div>
+                <div className="text-white/40">🗺️ Pathfinder</div>
+                <div className="text-white/40">🥁 Rhythm Recall</div>
+                <div className="text-white/40">🏆 Tournaments</div>
               </div>
             </div>
 
-            {/* Stats Preview */}
+            {/* Stats Preview - Apple-style */}
             {account && (
-              <div className="mt-8 bg-alithea-dark/50 rounded-2xl p-6 border border-white/10">
-                <h3 className="text-lg font-bold text-gray-300 mb-4">📊 Your Stats</h3>
-                <div className="grid grid-cols-4 gap-4">
+              <div className="card-apple p-apple-6 animate-slide-up">
+                <h3 className="font-sf-display text-subheading font-semibold text-white/80 mb-apple-4">
+                  📊 Your Stats
+                </h3>
+                <div className="grid grid-cols-4 gap-apple-4">
                   <div>
-                    <div className="text-2xl font-bold text-purple-400">0</div>
-                    <div className="text-xs text-gray-500">Games Played</div>
+                    <div className="font-sf-display text-display-xxl font-bold text-alithea-primary">0</div>
+                    <div className="text-caption text-white/40">Games Played</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-pink-400">0</div>
-                    <div className="text-xs text-gray-500">Best Score</div>
+                    <div className="font-sf-display text-display-xxl font-bold text-alithea-secondary">0</div>
+                    <div className="text-caption text-white/40">Best Score</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-cyan-400">0</div>
-                    <div className="text-xs text-gray-500">Win Streak</div>
+                    <div className="font-sf-display text-display-xxl font-bold text-alithea-accent">0</div>
+                    <div className="text-caption text-white/40">Win Streak</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-yellow-400">0</div>
-                    <div className="text-xs text-gray-500">$ALITHEA</div>
+                    <div className="font-sf-display text-display-xxl font-bold text-alithea-warning">0</div>
+                    <div className="text-caption text-white/40">$ALITHEA</div>
                   </div>
                 </div>
               </div>
@@ -138,10 +157,10 @@ export default function Home() {
 
         {/* Game Board */}
         {(gameMode === '4x4' || gameMode === '6x6') && (
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto animate-fade-in">
             <button
               onClick={handlePlayAgain}
-              className="mb-6 text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+              className="btn-apple-ghost mb-apple-6 flex items-center gap-2"
             >
               ← Back to Menu
             </button>
@@ -154,45 +173,51 @@ export default function Home() {
 
         {/* Game Complete */}
         {gameMode === 'complete' && gameResult && (
-          <div className="max-w-md mx-auto text-center">
-            <div className="bg-alithea-dark/80 rounded-2xl p-8 border border-white/10">
-              <div className="text-6xl mb-4">🎉</div>
-              <h2 className="text-3xl font-bold text-white mb-2">Memory Master!</h2>
-              <p className="text-gray-400 mb-6">You completed the challenge!</p>
+          <div className="max-w-md mx-auto text-center animate-slide-up">
+            <div className="card-apple p-apple-10">
+              <div className="text-6xl mb-apple-4">🎉</div>
+              <h2 className="font-sf-display text-display-xxl font-bold text-white mb-apple-2">
+                Memory Master!
+              </h2>
+              <p className="font-sf-text text-subheading text-white/50 mb-apple-8">
+                You completed the challenge!
+              </p>
               
-              <div className="grid grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-3 gap-apple-4 mb-apple-8">
                 <div>
-                  <div className="text-3xl font-bold text-purple-400">{gameResult.score}</div>
-                  <div className="text-sm text-gray-500">Score</div>
+                  <div className="score-value">{gameResult.score}</div>
+                  <div className="text-caption text-white/40">Score</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-pink-400">{gameResult.moves}</div>
-                  <div className="text-sm text-gray-500">Moves</div>
+                  <div className="font-sf-display text-display-xxl font-bold text-alithea-secondary">
+                    {gameResult.moves}
+                  </div>
+                  <div className="text-caption text-white/40">Moves</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-cyan-400">
+                  <div className="font-sf-display text-display-xxl font-bold text-alithea-accent">
                     {Math.floor(gameResult.time / 1000)}s
                   </div>
-                  <div className="text-sm text-gray-500">Time</div>
+                  <div className="text-caption text-white/40">Time</div>
                 </div>
               </div>
 
               {gameResult.moves <= gameResult.time / 1000 && (
-                <div className="bg-yellow-500/10 text-yellow-400 rounded-lg p-3 mb-6">
-                  ⚡ Speed Demon! You matched faster than 1 pair per second!
+                <div className="combo-badge mb-apple-6 mx-auto w-fit">
+                  ⚡ Speed Demon! Faster than 1 pair/second!
                 </div>
               )}
 
-              <div className="flex gap-4">
+              <div className="flex gap-apple-4">
                 <button
                   onClick={handlePlayAgain}
-                  className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-xl hover:scale-105 transition-transform"
+                  className="btn-apple-primary flex-1"
                 >
                   Play Again
                 </button>
                 <button
                   onClick={handlePlayAgain}
-                  className="flex-1 bg-gray-700 text-white font-bold py-3 px-6 rounded-xl hover:bg-gray-600 transition-colors"
+                  className="btn-apple-secondary flex-1"
                 >
                   Main Menu
                 </button>
@@ -202,10 +227,14 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 text-center text-gray-500 text-sm">
-        <p>Built on <span className="text-cyan-400">Sui</span> | Powered by Move</p>
-        <p className="mt-2">🧠 Train your memory. 💰 Earn rewards. 🏆 Compete globally.</p>
+      {/* Footer - Apple style */}
+      <footer className="container mx-auto px-apple-6 py-apple-8 text-center">
+        <p className="text-caption text-white/30">
+          Built on <span className="text-alithea-accent">Sui</span> | Powered by Move
+        </p>
+        <p className="text-caption text-white/20 mt-apple-2">
+          🧠 Train your memory. 💰 Earn rewards. 🏆 Compete globally.
+        </p>
       </footer>
     </main>
   );

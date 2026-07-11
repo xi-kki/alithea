@@ -3,18 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
+  /* Apple color tokens (adapted for dark theme) */
+  --color-midnight-graphite: #1d1d1f;
+  --color-deep-gray: #333333;
+  --color-medium-gray: #707070;
+  --color-light-gray: #858585;
+  --color-border-silver: #d6d6d6;
+  --color-canvas-white: #f5f5f7;
+  --color-interactive-blue: #0071e3;
+  
+  /* Alithea game colors */
+  --color-alithea-primary: #8B5CF6;
+  --color-alithea-secondary: #EC4899;
+  --color-alithea-accent: #06B6D4;
+  --color-alithea-success: #10B981;
+  --color-alithea-warning: #F59E0B;
+  
+  /* Game background */
   --background-start-rgb: 2, 6, 23;
   --background-end-rgb: 15, 23, 42;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(255, 255, 255);
   background: linear-gradient(
     to bottom,
     rgb(var(--background-start-rgb)),
     rgb(var(--background-end-rgb))
   );
+  font-family: 'SF Pro Text', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Card flip animation */
@@ -23,7 +42,7 @@ body {
 }
 
 .card-inner {
-  transition: transform 0.6s;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
 }
 
@@ -34,10 +53,19 @@ body {
 .card-front,
 .card-back {
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .card-back {
   transform: rotateY(180deg);
+}
+
+/* Apple-style glass morphism */
+.glass {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Glow effects */
@@ -53,10 +81,89 @@ body {
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
 }
 
-/* Grid patterns */
+.glow-success {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Grid pattern */
 .grid-pattern {
   background-image: 
-    linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+/* Apple-style buttons */
+.btn-apple {
+  @apply px-5 py-2.5 rounded-apple-lg font-sf-text text-body-sm font-medium transition-all duration-200;
+}
+
+.btn-apple-primary {
+  @apply btn-apple bg-alithea-primary text-white hover:bg-alithea-primary/90 active:scale-95;
+}
+
+.btn-apple-secondary {
+  @apply btn-apple bg-transparent border border-white/20 text-white hover:bg-white/10 active:scale-95;
+}
+
+.btn-apple-ghost {
+  @apply btn-apple bg-transparent text-white/70 hover:text-white hover:bg-white/5;
+}
+
+/* Apple-style cards */
+.card-apple {
+  @apply bg-alithea-card/80 backdrop-blur-sm border border-white/10 rounded-apple-md;
+}
+
+/* Score display */
+.score-value {
+  @apply font-sf-display text-display-xl font-semibold;
+  background: linear-gradient(135deg, var(--color-alithea-primary), var(--color-alithea-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Combo indicator */
+.combo-badge {
+  @apply inline-flex items-center gap-1 px-3 py-1 rounded-apple-full text-caption font-medium;
+  background: linear-gradient(135deg, var(--color-alithea-warning), #F97316);
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply h-2 rounded-apple-full overflow-hidden bg-white/10;
+}
+
+.progress-bar-fill {
+  @apply h-full transition-all duration-300 ease-out;
+  background: linear-gradient(90deg, var(--color-alithea-primary), var(--color-alithea-secondary));
+}
+
+/* Focus styles (Apple-style) */
+:focus-visible {
+  @apply outline-none ring-2 ring-alithea-primary ring-offset-2 ring-offset-alithea-darker;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Selection */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
 }

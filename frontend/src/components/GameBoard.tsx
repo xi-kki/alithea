@@ -21,18 +21,8 @@ interface GameBoardProps {
   onComplete: (score: number, moves: number, time: number) => void;
 }
 
-// Emoji icons for card types
-const CARD_ICONS: Record<number, string> = {
-  0: '🔮', 1: '⚡', 2: '🌙', 3: '🔥',
-  4: '⭐', 5: '🌊', 6: '💎', 7: '🌸',
-  8: '🎭', 9: '🦋', 10: '🍀', 11: '🎯',
-  12: '🎪', 13: '🎨', 14: '🎭', 15: '🌈',
-  16: '🎲', 17: '🃏',
-};
-
 export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
   const totalPairs = gridSize === 4 ? 8 : 18;
-  const totalCards = totalPairs * 2;
   const columns = gridSize === 4 ? 4 : 6;
 
   const [gameState, setGameState] = useState<GameState>({
@@ -56,7 +46,7 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
       cards.push({ type: i, isRevealed: false, isMatched: false });
       cards.push({ type: i, isRevealed: false, isMatched: false });
     }
-    // Shuffle
+    // Fisher-Yates shuffle
     for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cards[i], cards[j]] = [cards[j], cards[i]];
@@ -89,7 +79,7 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
         const newMoveCount = prev.moveCount + 1;
 
         if (firstCard.type === secondCard.type) {
-          // Match!
+          // Match found!
           newCards[prev.firstCardIndex] = { ...newCards[prev.firstCardIndex], isMatched: true, isRevealed: false };
           newCards[index] = { ...newCards[index], isMatched: true, isRevealed: false };
 
@@ -118,7 +108,7 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
             isComplete,
           };
         } else {
-          // No match
+          // No match - reset combo and hide cards
           setTimeout(() => {
             setGameState(prev2 => {
               const resetCards = [...prev2.cards];
@@ -143,7 +133,7 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
   }, [gameState, isProcessing, onComplete]);
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-apple-6">
       <ScoreDisplay
         moves={gameState.moveCount}
         matches={gameState.matchCount}
@@ -153,8 +143,9 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
         startTime={gameState.startTime}
       />
 
+      {/* Game Grid - Apple-style */}
       <div
-        className={`grid gap-3 md:gap-4 w-full max-w-lg`}
+        className={`grid gap-3 md:gap-4 w-full max-w-lg p-apple-4 card-apple`}
         style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
       >
         {gameState.cards.map((card, index) => (
@@ -170,10 +161,17 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
         ))}
       </div>
 
+      {/* Game Complete Overlay */}
       {gameState.isComplete && (
         <div className="text-center animate-fade-in">
-          <h2 className="text-3xl font-bold text-green-400 mb-2">🎉 Complete!</h2>
-          <p className="text-gray-400">Calculating your score...</p>
+          <div className="card-apple p-apple-6">
+            <h2 className="font-sf-display text-heading-lg font-bold text-alithea-success mb-apple-2">
+              🎉 Complete!
+            </h2>
+            <p className="font-sf-text text-body-sm text-white/50">
+              Calculating your score...
+            </p>
+          </div>
         </div>
       )}
     </div>
