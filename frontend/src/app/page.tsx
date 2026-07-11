@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { WalletButton } from '@/components/WalletButton';
 import { GameBoard } from '@/components/GameBoard';
+import { PatternEcho } from '@/components/PatternEcho';
 
-type GameMode = 'menu' | '4x4' | '6x6' | 'complete';
+type GameMode = 'menu' | '4x4' | '6x6' | 'pattern-3' | 'pattern-4' | 'complete';
 
 export default function Home() {
   const account = useCurrentAccount();
@@ -109,13 +110,55 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Coming Soon - Apple-style section */}
+            {/* Pattern Echo - Now Available! */}
+            <div className="mb-apple-8">
+              <h3 className="font-sf-display text-subheading font-semibold text-white/80 mb-apple-4">
+                🧠 Memory Challenges
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-apple-4">
+                <button
+                  onClick={() => setGameMode('pattern-3')}
+                  className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-accent to-alithea-primary hover:scale-[1.02] transition-all duration-300"
+                >
+                  <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-5 text-left">
+                    <div className="text-3xl mb-apple-2">🔵</div>
+                    <h4 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-1">
+                      Pattern Echo
+                    </h4>
+                    <p className="font-sf-text text-body-sm text-white/50">
+                      Watch and repeat the pattern!
+                    </p>
+                    <span className="inline-block mt-apple-2 px-2 py-1 bg-alithea-accent/20 text-alithea-accent text-caption rounded-apple-full">
+                      3×3 Grid
+                    </span>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setGameMode('pattern-4')}
+                  className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-primary to-alithea-secondary hover:scale-[1.02] transition-all duration-300"
+                >
+                  <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-5 text-left">
+                    <div className="text-3xl mb-apple-2">🟢</div>
+                    <h4 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-1">
+                      Pattern Echo
+                    </h4>
+                    <p className="font-sf-text text-body-sm text-white/50">
+                      Harder pattern challenge!
+                    </p>
+                    <span className="inline-block mt-apple-2 px-2 py-1 bg-alithea-primary/20 text-alithea-primary text-caption rounded-apple-full">
+                      4×4 Grid
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Coming Soon */}
             <div className="card-apple p-apple-6 mb-apple-8">
               <h3 className="font-sf-display text-subheading font-semibold text-white/80 mb-apple-4">
                 🚀 Coming Soon
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-apple-4 text-body-sm">
-                <div className="text-white/40">🔵 Pattern Echo</div>
                 <div className="text-white/40">🔢 Number Vault</div>
                 <div className="text-white/40">⭐ Chasing Stars</div>
                 <div className="text-white/40">🎨 Color Cascade</div>
@@ -123,6 +166,7 @@ export default function Home() {
                 <div className="text-white/40">🗺️ Pathfinder</div>
                 <div className="text-white/40">🥁 Rhythm Recall</div>
                 <div className="text-white/40">🏆 Tournaments</div>
+                <div className="text-white/40">🪙 $ALITHEA Token</div>
               </div>
             </div>
 
@@ -155,7 +199,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Game Board */}
+        {/* Classic Pairs Game Board */}
         {(gameMode === '4x4' || gameMode === '6x6') && (
           <div className="max-w-2xl mx-auto animate-fade-in">
             <button
@@ -166,6 +210,22 @@ export default function Home() {
             </button>
             <GameBoard
               gridSize={gameMode === '4x4' ? 4 : 6}
+              onComplete={handleGameComplete}
+            />
+          </div>
+        )}
+
+        {/* Pattern Echo Game */}
+        {(gameMode === 'pattern-3' || gameMode === 'pattern-4') && (
+          <div className="max-w-2xl mx-auto animate-fade-in">
+            <button
+              onClick={handlePlayAgain}
+              className="btn-apple-ghost mb-apple-6 flex items-center gap-2"
+            >
+              ← Back to Menu
+            </button>
+            <PatternEcho
+              gridSize={gameMode === 'pattern-3' ? 3 : 4}
               onComplete={handleGameComplete}
             />
           </div>
