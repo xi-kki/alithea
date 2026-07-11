@@ -66,7 +66,7 @@
 - [x] Classic Pairs (card matching)
 
 ### Phase 2
-- [ ] Pattern Echo (Simon says)
+- [x] Pattern Echo (Simon says) ✅ DONE
 - [ ] Number Vault (digit recall)
 - [ ] Chasing Stars (spatial memory)
 

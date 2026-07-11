@@ -5,8 +5,9 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import { WalletButton } from '@/components/WalletButton';
 import { GameBoard } from '@/components/GameBoard';
 import { PatternEcho } from '@/components/PatternEcho';
+import { NumberVault } from '@/components/NumberVault';
 
-type GameMode = 'menu' | '4x4' | '6x6' | 'pattern-3' | 'pattern-4' | 'complete';
+type GameMode = 'menu' | '4x4' | '6x6' | 'pattern-3' | 'pattern-4' | 'number-forward' | 'number-reverse' | 'number-ascending' | 'complete';
 
 export default function Home() {
   const account = useCurrentAccount();
@@ -153,13 +154,63 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Number Vault */}
+            <div className="mb-apple-8">
+              <h3 className="font-sf-display text-subheading font-semibold text-white/80 mb-apple-4">
+                🔢 Number Vault
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-apple-4">
+                <button
+                  onClick={() => setGameMode('number-forward')}
+                  className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-success to-alithea-accent hover:scale-[1.02] transition-all duration-300"
+                >
+                  <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-5 text-left">
+                    <div className="text-3xl mb-apple-2">➡️</div>
+                    <h4 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-1">
+                      Forward
+                    </h4>
+                    <p className="font-sf-text text-body-sm text-white/50">
+                      Remember in order
+                    </p>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setGameMode('number-reverse')}
+                  className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-warning to-alithea-secondary hover:scale-[1.02] transition-all duration-300"
+                >
+                  <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-5 text-left">
+                    <div className="text-3xl mb-apple-2">⬅️</div>
+                    <h4 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-1">
+                      Reverse
+                    </h4>
+                    <p className="font-sf-text text-body-sm text-white/50">
+                      Remember backwards
+                    </p>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setGameMode('number-ascending')}
+                  className="group relative overflow-hidden rounded-apple-md p-[1px] bg-gradient-to-br from-alithea-danger to-alithea-primary hover:scale-[1.02] transition-all duration-300"
+                >
+                  <div className="relative h-full rounded-apple-md bg-alithea-dark p-apple-5 text-left">
+                    <div className="text-3xl mb-apple-2">🔢</div>
+                    <h4 className="font-sf-display text-heading-sm font-semibold text-white mb-apple-1">
+                      Ascending
+                    </h4>
+                    <p className="font-sf-text text-body-sm text-white/50">
+                      Remember sorted
+                    </p>
+                  </div>
+                </button>
+              </div>
+            </div>
+
             {/* Coming Soon */}
             <div className="card-apple p-apple-6 mb-apple-8">
               <h3 className="font-sf-display text-subheading font-semibold text-white/80 mb-apple-4">
                 🚀 Coming Soon
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-apple-4 text-body-sm">
-                <div className="text-white/40">🔢 Number Vault</div>
                 <div className="text-white/40">⭐ Chasing Stars</div>
                 <div className="text-white/40">🎨 Color Cascade</div>
                 <div className="text-white/40">📝 Word Chain</div>
@@ -167,6 +218,7 @@ export default function Home() {
                 <div className="text-white/40">🥁 Rhythm Recall</div>
                 <div className="text-white/40">🏆 Tournaments</div>
                 <div className="text-white/40">🪙 $ALITHEA Token</div>
+                <div className="text-white/40">🏅 Achievements</div>
               </div>
             </div>
 
@@ -226,6 +278,22 @@ export default function Home() {
             </button>
             <PatternEcho
               gridSize={gameMode === 'pattern-3' ? 3 : 4}
+              onComplete={handleGameComplete}
+            />
+          </div>
+        )}
+
+        {/* Number Vault Game */}
+        {(gameMode === 'number-forward' || gameMode === 'number-reverse' || gameMode === 'number-ascending') && (
+          <div className="max-w-2xl mx-auto animate-fade-in">
+            <button
+              onClick={handlePlayAgain}
+              className="btn-apple-ghost mb-apple-6 flex items-center gap-2"
+            >
+              ← Back to Menu
+            </button>
+            <NumberVault
+              recallMode={gameMode.replace('number-', '') as 'forward' | 'reverse' | 'ascending'}
               onComplete={handleGameComplete}
             />
           </div>
