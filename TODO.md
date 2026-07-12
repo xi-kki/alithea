@@ -1,86 +1,85 @@
 # 🧠 Alithea — Memory Training Arena
 > "Will you remember?"
 
-## ⏱️ 1-HOUR SPRINT PLAN
+## 📋 STATUS: 🟢 Vercel Deployment Ready
 
-### PHASE 1: Foundation (10 min) ✅ DONE
+---
+
+## ✅ COMPLETED
+
+### Phase 1: Foundation
 - [x] GitHub repo created
 - [x] Project structure created
 - [x] Move.toml configured
 - [x] package.json + dependencies
 - [x] .gitignore
 
-### PHASE 2: Core Move Contract (20 min) ✅ DONE
-- [x] Classic Pairs game logic
-- [x] Board creation + shuffling
-- [x] Card reveal + match checking
-- [x] Score calculation
-- [ ] Basic tests
+### Phase 2: Core Move Contracts (8/8)
+- [x] Classic Pairs (`game.move`)
+- [x] Pattern Echo (`pattern_echo.move`)
+- [x] Number Vault (`number_vault.move`)
+- [x] Chasing Stars (`chasing_stars.move`)
+- [x] Color Cascade (`color_cascade.move`)
+- [x] Word Chain (`word_chain.move`)
+- [x] Pathfinder (`pathfinder.move`)
+- [x] Rhythm Recall (`rhythm_recall.move`)
 
-### PHASE 3: Frontend (20 min) ✅ DONE
+### Phase 3: Frontend (8/8 game modes)
 - [x] Next.js + Sui SDK setup
-- [x] Wallet connection (providers.tsx)
-- [x] Card component (Apple design)
-- [x] Game board component
-- [x] Score display
-- [x] Main page with Apple design system
-- [x] Tailwind config with Apple tokens
-- [x] Global CSS with Apple-inspired styles
+- [x] Wallet connection (`providers.tsx`)
+- [x] Apple design system (Tailwind + CSS)
+- [x] Classic Pairs (`GameBoard.tsx` + `Card.tsx`)
+- [x] Pattern Echo (`PatternEcho.tsx`)
+- [x] Number Vault (`NumberVault.tsx`)
+- [x] Chasing Stars (`ChasingStars.tsx`)
+- [x] Color Cascade (`ColorCascade.tsx`)
+- [x] Word Chain (`WordChain.tsx`)
+- [x] Pathfinder (`Pathfinder.tsx`)
+- [x] Rhythm Recall (`RhythmRecall.tsx`)
+- [x] Score display + results screen
+- [x] Main page with game selector
 
-### PHASE 4: Connect & Ship (10 min) ✅ DONE
-- [x] Frontend ↔ Contract integration (ready for testing)
-- [x] README written
-- [x] Pushed to GitHub ✅
-
----
-
-## 🎉 MVP COMPLETE!
-
-**Status**: ✅ MVP Ready for Testing
-**GitHub**: https://github.com/xi-kki/alithea
-**Time**: ~20 minutes
-
-### What's Working:
-- ✅ Move contract with Classic Pairs logic
-- ✅ Frontend with wallet connection
-- ✅ Card matching game (4x4 and 6x6)
-- ✅ Score calculation system
-- ✅ Combo multipliers
-- ✅ Timer tracking
-- ✅ Beautiful UI with animations
-- ✅ README documentation
-
-### What's Next:
-- 🔄 Deploy contract to testnet
-- 🔄 Connect frontend to live contract
-- 🔄 Add Pattern Echo mode
-- 🔄 Add Number Vault mode
-- 🔄 Add $ALITHEA token
-- 🔄 Add achievements
+### Phase 4: Deployment Config
+- [x] vercel.json configured
+- [x] .env.example for Vercel
+- [x] .gitignore clean
+- [x] README.md complete
 
 ---
 
-## 🎮 GAME MODES (Full Version)
+## 🚀 DEPLOY TO VERCEL
 
-### MVP (Phase 1)
-- [x] Classic Pairs (card matching)
+### Steps:
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Import `xi-kki/alithea` from GitHub
+3. **Root Directory**: `frontend`
+4. Framework: **Next.js** (auto-detected)
+5. Add env vars:
+   - `NEXT_PUBLIC_SUI_NETWORK` = `testnet`
+   - `NEXT_PUBLIC_SUI_RPC_URL` = `https://fullnode.testnet.sui.io:443`
+   - `NEXT_PUBLIC_CONTRACT_PACKAGE_ID` = `0x...` (after contract deploy)
+6. Deploy!
 
-### Phase 2
-- [x] Pattern Echo (Simon says) ✅ DONE
-- [ ] Number Vault (digit recall)
-- [ ] Chasing Stars (spatial memory)
+---
 
-### Phase 3
-- [ ] Color Cascade
-- [ ] Word Chain
-- [ ] Pathfinder
-- [ ] Rhythm Recall
+## 🔄 POST-DEPLOY TODO
 
-### Phase 4
-- [ ] Competitive modes (Duel, Tournament)
-- [ ] $ALITHEA token
-- [ ] Achievements (Soulbound NFTs)
-- [ ] Leaderboards
+### Immediate
+- [ ] Deploy Move contracts to Sui testnet
+- [ ] Fill in `NEXT_PUBLIC_CONTRACT_PACKAGE_ID`
+- [ ] Test wallet connection on live site
+- [ ] Test all 8 game modes
+
+### Near-term
+- [ ] Add scoring persistence (on-chain or local storage)
+- [ ] Add $ALITHEA token rewards
+- [ ] Add leaderboard (on-chain)
+- [ ] Add achievements (Soulbound NFTs)
+
+### Future
+- [ ] Tournament mode (multiplayer)
+- [ ] Mobile app (React Native)
+- [ ] Mainnet deployment
 
 ---
 
@@ -88,48 +87,36 @@
 
 ```
 alithea/
-├── contracts/           # Sui Move contracts
-│   ├── sources/
-│   │   ├── game.move        # Core game logic
-│   │   ├── board.move       # Board management
-│   │   ├── scoring.move     # Score calculation
-│   │   └── player.move      # Player profile
-│   ├── tests/
-│   └── Move.toml
-├── frontend/            # Next.js + Sui SDK
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── lib/             # Utilities
-│   │   └── types/           # TypeScript types
+├── contracts/sources/       # 8 Move smart contracts
+│   ├── game.move           # Classic Pairs
+│   ├── pattern_echo.move   # Simon Says
+│   ├── number_vault.move   # Digit Recall
+│   ├── chasing_stars.move  # Spatial Memory
+│   ├── color_cascade.move  # Color Sequence
+│   ├── word_chain.move     # Verbal Memory
+│   ├── pathfinder.move     # Route Memory
+│   └── rhythm_recall.move  # Auditory Memory
+├── frontend/               # Next.js + Sui SDK
+│   ├── src/app/            # Pages + layout
+│   ├── src/components/     # 12 React components
 │   └── package.json
-├── scripts/             # Deploy scripts
-└── TODO.md
+├── vercel.json             # Vercel deployment config
+└── README.md
 ```
 
 ---
 
 ## 🎯 SUCCESS CRITERIA
 
-- [ ] Move contract compiles
-- [ ] Frontend connects to wallet
-- [ ] Can create a game board
-- [ ] Can flip and match cards
-- [ ] Score calculates correctly
-- [ ] Deployed to Sui testnet
-- [ ] Pushed to GitHub
+- [x] Move contracts written (8/8)
+- [x] Frontend with all game modes (8/8)
+- [x] Apple design system
+- [x] Wallet integration
+- [x] Vercel config ready
+- [ ] Deployed to Vercel ← NEXT
+- [ ] Contracts deployed to testnet
+- [ ] Live and playable
 
 ---
 
-## 🧠 SKILLS MAP
-
-| Phase | Skills |
-|-------|--------|
-| Foundation | `senior-engineer` |
-| Move Contract | `sui` |
-| Frontend | `frontend-patterns` |
-| Quality | `security_scan` |
-| Ship | `fast-deploy` |
-
----
-
-*Let's build Alithea! 🚀*
+*Built with ❤️ on Sui*
