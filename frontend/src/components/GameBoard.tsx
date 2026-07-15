@@ -41,7 +41,7 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
 
   // Initialize game
   useEffect(() => {
-    const cards = [];
+    const cards: { type: number; isRevealed: boolean; isMatched: boolean }[] = [];
     for (let i = 0; i < totalPairs; i++) {
       cards.push({ type: i, isRevealed: false, isMatched: false });
       cards.push({ type: i, isRevealed: false, isMatched: false });
