@@ -52,11 +52,17 @@ module.exports = {
       },
       // Apple spacing (4px base)
       spacing: {
+        'apple-2': '2px',
+        'apple-4': '4px',
+        'apple-6': '6px',
         'apple-8': '8px',
+        'apple-10': '10px',
         'apple-12': '12px',
+        'apple-14': '14px',
         'apple-16': '16px',
         'apple-20': '20px',
         'apple-24': '24px',
+        'apple-32': '32px',
         'apple-40': '40px',
         'apple-48': '48px',
         'apple-52': '52px',

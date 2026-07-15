@@ -30,3 +30,5 @@ next-env.d.ts
 # Sui
 contracts/build/
 contracts/sources/*_debug.apjson
+
+.vercel

@@ -1,11 +1,11 @@
 # 🧠 Alithea — Memory Training Arena
 > "Will you remember?"
 
-## 📋 STATUS: 🟢 Vercel Deployment Ready
+## 📋 STATUS: 🟢 99% Complete — Ready for Deployment
 
 ---
 
-## ✅ COMPLETED
+## ✅ COMPLETED (99%)
 
 ### Phase 1: Foundation
 - [x] GitHub repo created
@@ -38,6 +38,9 @@
 - [x] Rhythm Recall (`RhythmRecall.tsx`)
 - [x] Score display + results screen
 - [x] Main page with game selector
+- [x] Landing page (Hero, About, How It Works, Token, FAQ, Footer)
+- [x] Animated gradient background
+- [x] Floating header with glass morphism
 
 ### Phase 4: Deployment Config
 - [x] vercel.json configured
@@ -45,9 +48,17 @@
 - [x] .gitignore clean
 - [x] README.md complete
 
+### Phase 5: Polish & Animations
+- [x] Card flip animations
+- [x] Glow effects (primary, secondary, accent, success, warning, danger)
+- [x] Combo badge animations
+- [x] Progress bar animations
+- [x] Fade-in/slide-up transitions
+- [x] Responsive design (mobile + desktop)
+
 ---
 
-## 🚀 DEPLOY TO VERCEL
+## 🚀 DEPLOY TO VERCEL (Last 1%)
 
 ### Steps:
 1. Go to [vercel.com/new](https://vercel.com/new)
@@ -62,21 +73,19 @@
 
 ---
 
-## 🔄 POST-DEPLOY TODO
+## 🔄 POST-DEPLOY TODO (Future Enhancements)
 
-### Immediate
+### Near-term
 - [ ] Deploy Move contracts to Sui testnet
 - [ ] Fill in `NEXT_PUBLIC_CONTRACT_PACKAGE_ID`
 - [ ] Test wallet connection on live site
 - [ ] Test all 8 game modes
-
-### Near-term
 - [ ] Add scoring persistence (on-chain or local storage)
+
+### Future
 - [ ] Add $ALITHEA token rewards
 - [ ] Add leaderboard (on-chain)
 - [ ] Add achievements (Soulbound NFTs)
-
-### Future
 - [ ] Tournament mode (multiplayer)
 - [ ] Mobile app (React Native)
 - [ ] Mainnet deployment
@@ -98,7 +107,7 @@ alithea/
 │   └── rhythm_recall.move  # Auditory Memory
 ├── frontend/               # Next.js + Sui SDK
 │   ├── src/app/            # Pages + layout
-│   ├── src/components/     # 12 React components
+│   ├── src/components/     # 14 React components
 │   └── package.json
 ├── vercel.json             # Vercel deployment config
 └── README.md
@@ -113,7 +122,9 @@ alithea/
 - [x] Apple design system
 - [x] Wallet integration
 - [x] Vercel config ready
-- [ ] Deployed to Vercel ← NEXT
+- [x] Animations & polish
+- [x] Landing page
+- [ ] Deployed to Vercel ← LAST STEP
 - [ ] Contracts deployed to testnet
 - [ ] Live and playable
 

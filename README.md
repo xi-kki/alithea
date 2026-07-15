@@ -4,7 +4,7 @@
 
 Alithea is a memory training game built on the **Sui blockchain**. Train your memory, prove your skill, and earn rewards. Named after the Greek concept of *Aletheia* (truth/unveiling) — because memory is about revealing what's hidden.
 
-![Alithea](https://img.shields.io/badge/status-MVP-green) ![Sui](https://img.shields.io/badge/built%20on-Sui-purple) ![Move](https://img.shields.io/badge/language-Move-blue)
+![Alithea](https://img.shields.io/badge/status-99%25%20Complete-brightgreen) ![Sui](https://img.shields.io/badge/built%20on-Sui-purple) ![Move](https://img.shields.io/badge/language-Move-blue) ![Next.js](https://img.shields.io/badge/Framework-Next.js-black)
 
 ## 🎮 Features
 
@@ -134,10 +134,10 @@ Classic Pairs features 18 unique card icons:
 - [x] Phase 1: Foundation (Project setup)
 - [x] Phase 2: Core Move Contract (Game logic)
 - [x] Phase 3: Frontend (Game UI)
-- [ ] Phase 4: Additional Game Modes
-- [ ] Phase 5: Token & Achievements
-- [ ] Phase 6: Tournaments
-- [ ] Phase 7: Mobile Optimization
+- [x] Phase 4: Additional Game Modes (8/8 complete)
+- [ ] Phase 5: Token & Achievements (Future)
+- [ ] Phase 6: Tournaments (Future)
+- [ ] Phase 7: Mobile Optimization (Future)
 
 ## 🤝 Contributing
 
@@ -152,6 +152,26 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📝 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+## 🚀 Deployment
+
+### Vercel (Frontend)
+
+1. Push to GitHub
+2. Import `xi-kki/alithea` on [Vercel](https://vercel.com/new)
+3. Set Root Directory to `frontend`
+4. Add environment variables:
+   - `NEXT_PUBLIC_SUI_NETWORK=testnet`
+   - `NEXT_PUBLIC_SUI_RPC_URL=https://fullnode.testnet.sui.io:443`
+5. Deploy!
+
+### Sui Testnet (Contracts)
+
+```bash
+cd contracts
+sui move build
+sui client publish --gas-budget 100000000
+```
 
 ## 🔗 Links
 
