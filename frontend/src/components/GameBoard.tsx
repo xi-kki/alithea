@@ -112,7 +112,9 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
           setTimeout(() => {
             setGameState(prev2 => {
               const resetCards = [...prev2.cards];
-              resetCards[prev.firstCardIndex] = { ...resetCards[prev.firstCardIndex], isRevealed: false };
+              if (prev.firstCardIndex !== null) {
+                resetCards[prev.firstCardIndex] = { ...resetCards[prev.firstCardIndex], isRevealed: false };
+              }
               resetCards[index] = { ...resetCards[index], isRevealed: false };
               return { ...prev2, cards: resetCards, firstCardIndex: null, combo: 0 };
             });
