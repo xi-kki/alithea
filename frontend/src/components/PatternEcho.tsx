@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { Eye, Hand, Hourglass, XCircle } from 'lucide-react';
 
 interface PatternEchoProps {
   gridSize: 3 | 4;
@@ -130,22 +131,22 @@ export function PatternEcho({ gridSize, onComplete }: PatternEchoProps) {
         <div className="text-center mb-apple-4">
           {gameStatus === 'watching' && (
             <div className="combo-badge animate-pulse">
-              👁️ Watch the pattern...
+              <span className="inline-flex items-center gap-2"><Eye className="w-5 h-5 text-cyan-300" /> Watch the pattern...</span>
             </div>
           )}
           {gameStatus === 'input' && (
             <div className="combo-badge">
-              ✋ Your turn! Repeat the pattern
+              <span className="inline-flex items-center gap-2"><Hand className="w-5 h-5 text-white/80" /> Your turn! Repeat the pattern</span>
             </div>
           )}
           {gameStatus === 'checking' && (
             <div className="combo-badge">
-              ⏳ Checking...
+              <span className="inline-flex items-center gap-2"><Hourglass className="w-5 h-5 text-amber-300" /> Checking...</span>
             </div>
           )}
           {gameStatus === 'failed' && (
             <div className="px-4 py-2 bg-alithea-danger/20 text-alithea-danger rounded-apple-full">
-              ❌ Wrong pattern!
+              <span className="inline-flex items-center gap-2"><XCircle className="w-5 h-5 text-red-400" /> Wrong pattern!</span>
             </div>
           )}
         </div>

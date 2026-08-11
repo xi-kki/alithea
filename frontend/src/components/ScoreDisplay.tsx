@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Flame } from 'lucide-react';
 
 interface ScoreDisplayProps {
   moves: number;
@@ -76,7 +77,7 @@ export function ScoreDisplay({ moves, matches, total, combo, score, startTime }:
       {combo >= 2 && (
         <div className="text-center animate-fade-in">
           <span className="combo-badge">
-            🔥 {combo}x Combo!
+            <span className="inline-flex items-center gap-2"><Flame className="w-5 h-5 text-orange-400" /> {combo}x Combo!</span>
           </span>
         </div>
       )}

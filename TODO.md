@@ -1,14 +1,14 @@
-# 🧠 Alithea — Memory Training Arena
+# Alithea — Memory Training Arena
 > "Will you remember?"
 
-## 📋 STATUS: 🟢 99% Complete — Ready for Deployment
+## STATUS: LIVE — https://alitia.vercel.app
 
 ---
 
-## ✅ COMPLETED (99%)
+## COMPLETED
 
 ### Phase 1: Foundation
-- [x] GitHub repo created
+- [x] GitHub repo created (xi-kki/alithea, public)
 - [x] Project structure created
 - [x] Move.toml configured
 - [x] package.json + dependencies
@@ -23,10 +23,12 @@
 - [x] Word Chain (`word_chain.move`)
 - [x] Pathfinder (`pathfinder.move`)
 - [x] Rhythm Recall (`rhythm_recall.move`)
+- [x] Compile errors fixed (missing `mut` in chasing_stars + pathfinder, missing `;` after if-statements)
+- [x] Published to Sui testnet — package `0x87326959ace8e0f0703054b5919c972f0309781e380b6d9784cb98f7779a0b6d` (see `contracts/Published.toml`)
 
-### Phase 3: Frontend (8/8 game modes)
+### Phase 3: Frontend (10/10 game modes)
 - [x] Next.js + Sui SDK setup
-- [x] Wallet connection (`providers.tsx`)
+- [x] Wallet connection (dapp-kit ConnectButton, testnet RPC)
 - [x] Apple design system (Tailwind + CSS)
 - [x] Classic Pairs (`GameBoard.tsx` + `Card.tsx`)
 - [x] Pattern Echo (`PatternEcho.tsx`)
@@ -36,63 +38,44 @@
 - [x] Word Chain (`WordChain.tsx`)
 - [x] Pathfinder (`Pathfinder.tsx`)
 - [x] Rhythm Recall (`RhythmRecall.tsx`)
+- [x] Spin the Cup (`SpinTheCup.tsx`) — the beginner game: 3 cups, 1 pebble, shuffled; follow the pebble
+- [x] Spaceship Run (`Spaceship.tsx`) — remember the safe route through the asteroids, reach the planet
 - [x] Score display + results screen
-- [x] Main page with game selector
-- [x] Landing page (Hero, About, How It Works, Token, FAQ, Footer)
+- [x] Main page with game selector (10 modes)
+- [x] Landing page (Hero, About, How It Works, Guides, Token, FAQ, Footer)
 - [x] Animated gradient background
 - [x] Floating header with glass morphism
 
-### Phase 4: Deployment Config
-- [x] vercel.json configured
-- [x] .env.example for Vercel
-- [x] .gitignore clean
-- [x] README.md complete
+### Phase 4: No-Emoji Rule (lucide.dev only)
+- [x] All emoji glyphs removed from page + components, replaced with lucide-react icons
+- [x] Card faces: 18 lucide icons (Diamond, Zap, Moon, Flame, Star, Waves, Gem, Flower2, Theater, Bug, Clover, Target, Tent, Palette, Rainbow, Dices, Spade, Sparkles)
 
-### Phase 5: Polish & Animations
-- [x] Card flip animations
-- [x] Glow effects (primary, secondary, accent, success, warning, danger)
-- [x] Combo badge animations
-- [x] Progress bar animations
-- [x] Fade-in/slide-up transitions
-- [x] Responsive design (mobile + desktop)
+### Phase 5: Beginner Guides
+- [x] Guides data in `src/lib/guides.ts` (how to play + beginner tips + pro tips + `updated` date per game)
+- [x] Guide modal (`src/components/GameGuide.tsx`) — open from any game screen ("How to Play") or the Beginner Guides landing section
+- [x] Guides are versioned and refreshed as the arena evolves
 
----
-
-## 🚀 DEPLOY TO VERCEL (Last 1%)
-
-### Steps:
-1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import `xi-kki/alithea` from GitHub
-3. **Root Directory**: `frontend`
-4. Framework: **Next.js** (auto-detected)
-5. Add env vars:
-   - `NEXT_PUBLIC_SUI_NETWORK` = `testnet`
-   - `NEXT_PUBLIC_SUI_RPC_URL` = `https://fullnode.testnet.sui.io:443`
-   - `NEXT_PUBLIC_CONTRACT_PACKAGE_ID` = `0x...` (after contract deploy)
-6. Deploy!
+### Phase 6: Deployment
+- [x] Vercel project `alitia` (root directory `frontend`) — LIVE at https://alitia.vercel.app
+- [x] Env vars set: NEXT_PUBLIC_SUI_NETWORK, NEXT_PUBLIC_SUI_RPC_URL, NEXT_PUBLIC_CONTRACT_PACKAGE_ID, NEXT_PUBLIC_CONTRACT_MODULE
+- [x] All 10 games verified clickable and playable on the live build (local smoke test + live check)
+- [x] README.md updated
 
 ---
 
-## 🔄 POST-DEPLOY TODO (Future Enhancements)
+## FUTURE ENHANCEMENTS
 
-### Near-term
-- [ ] Deploy Move contracts to Sui testnet
-- [ ] Fill in `NEXT_PUBLIC_CONTRACT_PACKAGE_ID`
-- [ ] Test wallet connection on live site
-- [ ] Test all 8 game modes
-- [ ] Add scoring persistence (on-chain or local storage)
-
-### Future
-- [ ] Add $ALITHEA token rewards
-- [ ] Add leaderboard (on-chain)
-- [ ] Add achievements (Soulbound NFTs)
+- [ ] $ALITHEA token rewards
+- [ ] Leaderboard (on-chain)
+- [ ] Achievements (Soulbound NFTs)
 - [ ] Tournament mode (multiplayer)
+- [ ] Wire the deployed contract package ID into the frontend game flows (games are currently client-side)
 - [ ] Mobile app (React Native)
 - [ ] Mainnet deployment
 
 ---
 
-## 🏗️ ARCHITECTURE
+## ARCHITECTURE
 
 ```
 alithea/
@@ -108,26 +91,28 @@ alithea/
 ├── frontend/               # Next.js + Sui SDK
 │   ├── src/app/            # Pages + layout
 │   ├── src/components/     # 14 React components
+│   ├── src/lib/guides.ts   # Per-game beginner guides
 │   └── package.json
-├── vercel.json             # Vercel deployment config
+├── scripts/                # Deploy scripts
 └── README.md
 ```
 
 ---
 
-## 🎯 SUCCESS CRITERIA
+## SUCCESS CRITERIA
 
-- [x] Move contracts written (8/8)
-- [x] Frontend with all game modes (8/8)
+- [x] Move contracts written (8/8) and deployed to testnet
+- [x] Frontend with all game modes (10/10), all clickable and functional
+- [x] No emojis anywhere — lucide.dev icons only
+- [x] Beginner guides for every game, versioned and updatable
+- [x] Wallet integration functional
 - [x] Apple design system
-- [x] Wallet integration
-- [x] Vercel config ready
 - [x] Animations & polish
 - [x] Landing page
-- [ ] Deployed to Vercel ← LAST STEP
-- [ ] Contracts deployed to testnet
-- [ ] Live and playable
+- [x] Deployed to Vercel — LIVE at https://alitia.vercel.app
+- [x] Contracts deployed to testnet
+- [x] Live and playable
 
 ---
 
-*Built with ❤️ on Sui*
+*Built on Sui.*

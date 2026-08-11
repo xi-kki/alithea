@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { Delete, Eye, Hand, Hourglass, XCircle } from 'lucide-react';
 
 interface NumberVaultProps {
   recallMode: 'forward' | 'reverse' | 'ascending';
@@ -148,22 +149,22 @@ export function NumberVault({ recallMode, onComplete }: NumberVaultProps) {
         <div className="text-center mb-apple-4">
           {gameStatus === 'showing' && (
             <div className="combo-badge animate-pulse">
-              👁️ Memorize: {showTimer}s
+              <span className="inline-flex items-center gap-2"><Eye className="w-5 h-5 text-cyan-300" /> Memorize: {showTimer}s</span>
             </div>
           )}
           {gameStatus === 'input' && (
             <div className="combo-badge">
-              ✋ Type the numbers!
+              <span className="inline-flex items-center gap-2"><Hand className="w-5 h-5 text-white/80" /> Type the numbers!</span>
             </div>
           )}
           {gameStatus === 'checking' && (
             <div className="combo-badge">
-              ⏳ Checking...
+              <span className="inline-flex items-center gap-2"><Hourglass className="w-5 h-5 text-amber-300" /> Checking...</span>
             </div>
           )}
           {gameStatus === 'failed' && (
             <div className="px-4 py-2 bg-alithea-danger/20 text-alithea-danger rounded-apple-full">
-              ❌ Wrong sequence!
+              <span className="inline-flex items-center gap-2"><XCircle className="w-5 h-5 text-red-400" /> Wrong sequence!</span>
             </div>
           )}
         </div>
@@ -229,7 +230,7 @@ export function NumberVault({ recallMode, onComplete }: NumberVaultProps) {
                 onClick={handleBackspace}
                 className="h-12 rounded-apple-md bg-alithea-danger/20 border border-alithea-danger/30 hover:bg-alithea-danger/30 transition-all duration-200 active:scale-95"
               >
-                <span className="text-white">⌫</span>
+                <Delete className="w-5 h-5 text-white" />
               </button>
               <button
                 onClick={handleClear}

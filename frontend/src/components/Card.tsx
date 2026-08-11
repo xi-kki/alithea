@@ -1,6 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import {
+  Bug,
+  Clover,
+  Diamond,
+  Dices,
+  Flame,
+  Flower2,
+  Gem,
+  HelpCircle,
+  Moon,
+  Palette,
+  Rainbow,
+  Spade,
+  Sparkles,
+  Star,
+  Target,
+  Tent,
+  Theater,
+  Waves,
+  Zap,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface CardProps {
   index: number;
@@ -11,26 +33,26 @@ interface CardProps {
   disabled: boolean;
 }
 
-// Emoji icons for card types
-const CARD_ICONS: Record<number, string> = {
-  0: '🔮',
-  1: '⚡',
-  2: '🌙',
-  3: '🔥',
-  4: '⭐',
-  5: '🌊',
-  6: '💎',
-  7: '🌸',
-  8: '🎭',
-  9: '🦋',
-  10: '🍀',
-  11: '🎯',
-  12: '🎪',
-  13: '🎨',
-  14: '🌈',
-  15: '🎲',
-  16: '🃏',
-  17: '✨',
+// Lucide icons for card types
+const CARD_ICONS: Record<number, LucideIcon> = {
+  0: Diamond,
+  1: Zap,
+  2: Moon,
+  3: Flame,
+  4: Star,
+  5: Waves,
+  6: Gem,
+  7: Flower2,
+  8: Theater,
+  9: Bug,
+  10: Clover,
+  11: Target,
+  12: Tent,
+  13: Palette,
+  14: Rainbow,
+  15: Dices,
+  16: Spade,
+  17: Sparkles,
 };
 
 export function Card({ index, cardType, isRevealed, isMatched, onReveal, disabled }: CardProps) {
@@ -94,7 +116,10 @@ export function Card({ index, cardType, isRevealed, isMatched, onReveal, disable
             ${isMatched ? 'ring-2 ring-alithea-success/30' : ''}`}
         >
           <span className="text-4xl md:text-5xl drop-shadow-lg">
-            {CARD_ICONS[cardType] || '❓'}
+            {(() => {
+              const Icon = CARD_ICONS[cardType] ?? HelpCircle;
+              return <Icon className="w-10 h-10 md:w-12 md:h-12 text-white/90" />;
+            })()}
           </span>
         </div>
       </div>

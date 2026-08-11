@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Card } from './Card';
 import { ScoreDisplay } from './ScoreDisplay';
+import { PartyPopper } from 'lucide-react';
 
 interface GameState {
   cards: { type: number; isRevealed: boolean; isMatched: boolean }[];
@@ -168,7 +169,7 @@ export function GameBoard({ gridSize, onComplete }: GameBoardProps) {
         <div className="text-center animate-fade-in">
           <div className="card-apple p-apple-6">
             <h2 className="font-sf-display text-heading-lg font-bold text-alithea-success mb-apple-2">
-              🎉 Complete!
+              <span className="inline-flex items-center gap-2"><PartyPopper className="w-5 h-5 text-purple-300" /> Complete!</span>
             </h2>
             <p className="font-sf-text text-body-sm text-white/50">
               Calculating your score...

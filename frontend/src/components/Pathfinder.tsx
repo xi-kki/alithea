@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { CheckCircle2, Circle, Footprints, Map, X, XCircle } from 'lucide-react';
 
 interface PathfinderProps {
   gridSize: 4 | 5 | 6;
@@ -168,22 +169,22 @@ export function Pathfinder({ gridSize, onComplete }: PathfinderProps) {
         <div className="text-center mb-apple-4">
           {gameStatus === 'showing' && (
             <div className="combo-badge animate-pulse">
-              🗺️ Memorize the path! {showTimer}s
+              <span className="inline-flex items-center gap-2"><Map className="w-5 h-5 text-teal-300" /> Memorize the path! {showTimer}s</span>
             </div>
           )}
           {gameStatus === 'input' && (
             <div className="combo-badge">
-              🚶 Trace the path from 🟢 to 🔴
+              <span className="inline-flex items-center gap-2"><Footprints className="w-5 h-5 text-white/80" /> Trace the path from <Circle className="w-5 h-5 text-green-400 fill-green-400/30" /> to <Circle className="w-5 h-5 text-red-400 fill-red-400/30" /></span>
             </div>
           )}
           {gameStatus === 'checking' && (
             <div className="combo-badge">
-              ✅ Path complete!
+              <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> Path complete!</span>
             </div>
           )}
           {gameStatus === 'failed' && (
             <div className="px-4 py-2 bg-alithea-danger/20 text-alithea-danger rounded-apple-full">
-              ❌ Wrong step!
+              <span className="inline-flex items-center gap-2"><XCircle className="w-5 h-5 text-red-400" /> Wrong step!</span>
             </div>
           )}
         </div>
@@ -217,16 +218,16 @@ export function Pathfinder({ gridSize, onComplete }: PathfinderProps) {
             `}
           >
             {cell.isStart && (gameStatus === 'showing' || playerPath.includes(index)) && (
-              <span className="text-lg">🟢</span>
+              <Circle className="w-5 h-5 text-green-400 fill-green-400/30" />
             )}
             {cell.isEnd && gameStatus === 'showing' && (
-              <span className="text-lg">🔴</span>
+              <Circle className="w-5 h-5 text-red-400 fill-red-400/30" />
             )}
             {cell.isVisited && !cell.isStart && (
-              <span className="text-lg">👣</span>
+              <Footprints className="w-5 h-5 text-white/80" />
             )}
             {wrongCell === index && (
-              <span className="text-lg">❌</span>
+              <X className="w-5 h-5 text-red-400" />
             )}
           </button>
         ))}

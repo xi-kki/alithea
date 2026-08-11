@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { CheckCircle2, Star, X, XCircle } from 'lucide-react';
 
 interface ChasingStarsProps {
   gridSize: 3 | 4 | 5;
@@ -129,22 +130,22 @@ export function ChasingStars({ gridSize, onComplete }: ChasingStarsProps) {
         <div className="text-center mb-apple-4">
           {gameStatus === 'showing' && (
             <div className="combo-badge animate-pulse">
-              ⭐ Memorize star positions! {showTimer}s
+              <span className="inline-flex items-center gap-2"><Star className="w-5 h-5 text-yellow-300" /> Memorize star positions! {showTimer}s</span>
             </div>
           )}
           {gameStatus === 'input' && (
             <div className="combo-badge">
-              ⭐ Find all the stars!
+              <span className="inline-flex items-center gap-2"><Star className="w-5 h-5 text-yellow-300" /> Find all the stars!</span>
             </div>
           )}
           {gameStatus === 'checking' && (
             <div className="combo-badge">
-              ✅ All stars found!
+              <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> All stars found!</span>
             </div>
           )}
           {gameStatus === 'failed' && (
             <div className="px-4 py-2 bg-alithea-danger/20 text-alithea-danger rounded-apple-full">
-              ❌ No star there!
+              <span className="inline-flex items-center gap-2"><XCircle className="w-5 h-5 text-red-400" /> No star there!</span>
             </div>
           )}
         </div>
@@ -174,10 +175,10 @@ export function ChasingStars({ gridSize, onComplete }: ChasingStarsProps) {
             `}
           >
             {isStarVisible(index) && (
-              <span className="text-2xl md:text-3xl">⭐</span>
+              <Star className="w-6 h-6 md:w-7 md:h-7 text-yellow-300" />
             )}
             {wrongCell === index && (
-              <span className="text-2xl md:text-3xl">❌</span>
+              <X className="w-6 h-6 md:w-7 md:h-7 text-red-400" />
             )}
           </button>
         ))}

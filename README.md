@@ -4,28 +4,34 @@
 
 Alithea is a memory training game built on the **Sui blockchain**. Train your memory, prove your skill, and earn rewards. Named after the Greek concept of *Aletheia* (truth/unveiling) — because memory is about revealing what's hidden.
 
-![Alithea](https://img.shields.io/badge/status-99%25%20Complete-brightgreen) ![Sui](https://img.shields.io/badge/built%20on-Sui-purple) ![Move](https://img.shields.io/badge/language-Move-blue) ![Next.js](https://img.shields.io/badge/Framework-Next.js-black)
+![Alithea](https://img.shields.io/badge/status-LIVE-brightgreen) ![Sui](https://img.shields.io/badge/built%20on-Sui-purple) ![Move](https://img.shields.io/badge/language-Move-blue) ![Next.js](https://img.shields.io/badge/Framework-Next.js-black)
 
 ## 🎮 Features
 
-### MVP — Classic Pairs
-- **4×4 Grid**: Match 8 pairs of cards (Beginner)
-- **6×6 Grid**: Match 18 pairs of cards (Challenge)
-- **Scoring System**: Base score + speed bonus + combo multipliers
-- **Real-time Timer**: Track your speed
-- **Wallet Integration**: Connect with Sui wallet
+### Play Live
+- **URL**: https://alitia.vercel.app (Sui testnet)
+- **Smart contracts**: deployed on Sui testnet — package `0x87326959ace8e0f0703054b5919c972f0309781e380b6d9784cb98f7779a0b6d`
 
-### Coming Soon
-- 🔵 **Pattern Echo** — Simon says style sequence memory
-- 🔢 **Number Vault** — Digit recall challenges
-- ⭐ **Chasing Stars** — Spatial memory grid
-- 🎨 **Color Cascade** — Color sequence memory
-- 📝 **Word Chain** — Verbal memory challenges
-- 🗺️ **Pathfinder** — Route memory
-- 🥁 **Rhythm Recall** — Auditory memory
-- 🏆 **Tournaments** — Competitive multiplayer
-- 🪙 **$ALITHEA Token** — Play-to-earn rewards
-- 🏅 **Achievements** — Soulbound NFTs
+### The 10 Game Modes
+- **Spin the Cup** — the beginner game. Three cups, one pebble. Follow the shuffle.
+- **Classic Pairs** — flip, remember, match (4x4 and 6x6 grids)
+- **Pattern Echo** — Simon-says sequence memory
+- **Number Vault** — digit recall (forward, reverse, ascending)
+- **Chasing Stars** — spatial memory grid
+- **Color Cascade** — color sequence memory
+- **Word Chain** — verbal memory
+- **Pathfinder** — route memory
+- **Rhythm Recall** — auditory memory
+- **Spaceship Run** — remember the safe route through the asteroids and reach the planet
+
+### Beginner Guides
+Every game ships with a built-in guide: how to play, beginner tips, and pro tips. Open
+the "How to Play" button on any game screen, or browse the Beginner Guides section on
+the landing page. Guides are versioned (`updated` field) and refreshed as the arena evolves.
+
+### Design rules
+- No emojis anywhere — lucide.dev icons only.
+- Apple-inspired dark design system (see `frontend/src/app/globals.css`).
 
 ## 🚀 Quick Start
 
@@ -125,19 +131,20 @@ COMBO BONUS:
 
 ## 🎨 Card Themes
 
-Classic Pairs features 18 unique card icons:
-
-🔮 ⚡ 🌙 🔥 ⭐ 🌊 💎 🌸 🎭 🦋 🍀 🎯 🎪 🎨 🌈 🎲 🃏
+Classic Pairs features 18 unique card faces rendered with lucide.dev icons.
 
 ## 📈 Progress
 
 - [x] Phase 1: Foundation (Project setup)
 - [x] Phase 2: Core Move Contract (Game logic)
 - [x] Phase 3: Frontend (Game UI)
-- [x] Phase 4: Additional Game Modes (8/8 complete)
-- [ ] Phase 5: Token & Achievements (Future)
-- [ ] Phase 6: Tournaments (Future)
-- [ ] Phase 7: Mobile Optimization (Future)
+- [x] Phase 4: Additional Game Modes (10/10 complete)
+- [x] Phase 5: Beginner guides for every game
+- [x] Phase 6: Deployment (live at https://alitia.vercel.app)
+- [x] Phase 7: Smart contracts deployed to Sui testnet
+- [ ] Phase 8: Token & Achievements (Future)
+- [ ] Phase 9: Tournaments (Future)
+- [ ] Phase 10: Mobile Optimization (Future)
 
 ## 🤝 Contributing
 
@@ -157,21 +164,20 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ### Vercel (Frontend)
 
-1. Push to GitHub
-2. Import `xi-kki/alithea` on [Vercel](https://vercel.com/new)
-3. Set Root Directory to `frontend`
-4. Add environment variables:
+**Live at https://alitia.vercel.app** (project `xi-kkis-projects/alitia`, root directory `frontend`).
+
+Environment variables (production):
    - `NEXT_PUBLIC_SUI_NETWORK=testnet`
    - `NEXT_PUBLIC_SUI_RPC_URL=https://fullnode.testnet.sui.io:443`
-5. Deploy!
+   - `NEXT_PUBLIC_CONTRACT_PACKAGE_ID=0x87326959ace8e0f0703054b5919c972f0309781e380b6d9784cb98f7779a0b6d`
+   - `NEXT_PUBLIC_CONTRACT_MODULE=alithea`
 
 ### Sui Testnet (Contracts)
 
-```bash
-cd contracts
-sui move build
-sui client publish --gas-budget 100000000
-```
+Published 2026-08-10 — package `0x87326959ace8e0f0703054b5919c972f0309781e380b6d9784cb98f7779a0b6d`
+(see `contracts/Published.toml`). Build with `sui move build`, publish with
+`sui client publish --gas-budget 500000000`.
+
 
 ## 🔗 Links
 

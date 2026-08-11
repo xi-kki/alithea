@@ -114,7 +114,7 @@ module alithea::pathfinder {
 
             // Generate longer path
             let total_cells = get_total_cells(game.grid_size);
-            let new_path_len = vector::length(&game.path) + 1;
+            let mut new_path_len = vector::length(&game.path) + 1;
             let max_path = (total_cells * 5) / 10; // Max 50% of cells
             if (new_path_len > max_path) {
                 new_path_len = max_path;
@@ -173,10 +173,10 @@ module alithea::pathfinder {
 
             // Get valid neighbors
             let mut neighbors = vector[];
-            if (row > 0) { vector::push_back(&mut neighbors, current - (grid as u8)); }
-            if (row < grid - 1) { vector::push_back(&mut neighbors, current + (grid as u8)); }
-            if (col > 0) { vector::push_back(&mut neighbors, current - 1); }
-            if (col < grid - 1) { vector::push_back(&mut neighbors, current + 1); }
+            if (row > 0) { vector::push_back(&mut neighbors, current - (grid as u8)); };
+            if (row < grid - 1) { vector::push_back(&mut neighbors, current + (grid as u8)); };
+            if (col > 0) { vector::push_back(&mut neighbors, current - 1); };
+            if (col < grid - 1) { vector::push_back(&mut neighbors, current + 1); };
 
             // Pick a neighbor not in path
             let mut found = false;

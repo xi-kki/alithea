@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { FileText, Hourglass, PenLine, XCircle } from 'lucide-react';
 
 interface WordChainProps {
   difficulty: 'easy' | 'medium' | 'hard';
@@ -159,22 +160,22 @@ export function WordChain({ difficulty, onComplete }: WordChainProps) {
         <div className="text-center mb-apple-4">
           {gameStatus === 'showing' && (
             <div className="combo-badge animate-pulse">
-              📝 Memorize the words! {showTimer}s
+              <span className="inline-flex items-center gap-2"><FileText className="w-5 h-5 text-indigo-300" /> Memorize the words! {showTimer}s</span>
             </div>
           )}
           {gameStatus === 'input' && (
             <div className="combo-badge">
-              ✍️ Type each word and press Enter
+              <span className="inline-flex items-center gap-2"><PenLine className="w-5 h-5 text-white/80" /> Type each word and press Enter</span>
             </div>
           )}
           {gameStatus === 'checking' && (
             <div className="combo-badge">
-              ⏳ Checking...
+              <span className="inline-flex items-center gap-2"><Hourglass className="w-5 h-5 text-amber-300" /> Checking...</span>
             </div>
           )}
           {gameStatus === 'failed' && (
             <div className="px-4 py-2 bg-alithea-danger/20 text-alithea-danger rounded-apple-full">
-              ❌ Wrong word! Expected: {words[playerInput.length]}
+              <span className="inline-flex items-center gap-2"><XCircle className="w-5 h-5 text-red-400" /> Wrong word! Expected: {words[playerInput.length]}</span>
             </div>
           )}
         </div>

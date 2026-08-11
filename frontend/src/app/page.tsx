@@ -10,10 +10,45 @@ import { ColorCascade } from '@/components/ColorCascade';
 import { WordChain } from '@/components/WordChain';
 import { Pathfinder } from '@/components/Pathfinder';
 import { RhythmRecall } from '@/components/RhythmRecall';
+import { SpinTheCup } from '@/components/SpinTheCup';
+import { Spaceship } from '@/components/Spaceship';
+import { GameGuide } from '@/components/GameGuide';
+import { GUIDES } from '@/lib/guides';
+import {
+  BookOpen,
+  ArrowLeft,
+  BarChart3,
+  Blocks,
+  Brain,
+  ChevronRight,
+  Crown,
+  CupSoda,
+  Drum,
+  Dumbbell,
+  Eye,
+  FileText,
+  Flame,
+  Gamepad2,
+  Hash,
+  Heart,
+  Layers,
+  Link,
+  Map,
+  Medal,
+  Palette,
+  PartyPopper,
+  Rocket,
+  Sparkles,
+  Star,
+  Swords,
+  Target,
+  Trophy,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 // ============ TYPES ============
 
-type GameMode = 'home' | 'classic' | 'pattern' | 'number' | 'stars' | 'color' | 'words' | 'path' | 'rhythm';
+type GameMode = 'home' | 'classic' | 'pattern' | 'number' | 'stars' | 'color' | 'words' | 'path' | 'rhythm' | 'spin' | 'ship';
 type SubMode = string | null;
 
 interface GameResult {
@@ -24,11 +59,19 @@ interface GameResult {
 
 // ============ GAME MODES ============
 
-const GAME_MODES = [
+const GAME_MODES: Array<{
+  id: GameMode;
+  name: string;
+  icon: LucideIcon;
+  description: string;
+  color: string;
+  subModes: Array<{ id: string; label: string; desc: string }>;
+}> = [
+
   {
     id: 'classic' as GameMode,
     name: 'Classic Pairs',
-    icon: '🃏',
+    icon: Layers,
     description: 'Flip, remember, match. The foundation of memory mastery.',
     color: 'from-purple-500 to-pink-500',
     subModes: [
@@ -39,7 +82,7 @@ const GAME_MODES = [
   {
     id: 'pattern' as GameMode,
     name: 'Pattern Echo',
-    icon: '👁️',
+    icon: Eye,
     description: 'Watch the sequence unfold. Then recreate it from memory.',
     color: 'from-cyan-500 to-blue-500',
     subModes: [
@@ -50,7 +93,7 @@ const GAME_MODES = [
   {
     id: 'number' as GameMode,
     name: 'Number Vault',
-    icon: '🔢',
+    icon: Hash,
     description: 'Digits flash on screen. Can you recall them all?',
     color: 'from-green-500 to-emerald-500',
     subModes: [
@@ -62,7 +105,7 @@ const GAME_MODES = [
   {
     id: 'stars' as GameMode,
     name: 'Chasing Stars',
-    icon: '⭐',
+    icon: Star,
     description: 'Stars appear and vanish. Trust your spatial memory.',
     color: 'from-yellow-500 to-orange-500',
     subModes: [
@@ -74,7 +117,7 @@ const GAME_MODES = [
   {
     id: 'color' as GameMode,
     name: 'Color Cascade',
-    icon: '🎨',
+    icon: Palette,
     description: 'Colors pulse in sequence. How long can you keep up?',
     color: 'from-pink-500 to-rose-500',
     subModes: [
@@ -86,7 +129,7 @@ const GAME_MODES = [
   {
     id: 'words' as GameMode,
     name: 'Word Chain',
-    icon: '📝',
+    icon: FileText,
     description: 'Words appear one by one. Stack them in your mind.',
     color: 'from-indigo-500 to-violet-500',
     subModes: [
@@ -98,7 +141,7 @@ const GAME_MODES = [
   {
     id: 'path' as GameMode,
     name: 'Pathfinder',
-    icon: '🗺️',
+    icon: Map,
     description: 'Trace the path. Then walk it blind.',
     color: 'from-teal-500 to-cyan-500',
     subModes: [
@@ -110,13 +153,36 @@ const GAME_MODES = [
   {
     id: 'rhythm' as GameMode,
     name: 'Rhythm Recall',
-    icon: '🥁',
+    icon: Drum,
     description: 'Beats play in pattern. Your turn to repeat.',
     color: 'from-amber-500 to-orange-500',
     subModes: [
       { id: 'easy', label: 'Easy', desc: '4 pads' },
       { id: 'medium', label: 'Medium', desc: '6 pads' },
       { id: 'hard', label: 'Hard', desc: '8 pads' },
+    ],
+  },
+  {
+    id: 'spin' as GameMode,
+    name: 'Spin the Cup',
+    icon: CupSoda,
+    description: 'Three cups, one pebble. Watch the shuffle and keep your eyes on the prize.',
+    color: 'from-orange-500 to-amber-500',
+    subModes: [
+      { id: 'easy', label: 'Easy Shuffle', desc: '3 swaps' },
+      { id: 'hard', label: 'Fast Shuffle', desc: '6 swaps' },
+    ],
+  },
+  {
+    id: 'ship' as GameMode,
+    name: 'Spaceship Run',
+    icon: Rocket,
+    description: 'Remember the safe route through the asteroids. Reach the planet.',
+    color: 'from-blue-500 to-indigo-500',
+    subModes: [
+      { id: 'easy', label: 'Short Route', desc: '3 steps' },
+      { id: 'medium', label: 'Medium Route', desc: '5 steps' },
+      { id: 'hard', label: 'Long Route', desc: '7 steps' },
     ],
   },
 ];
@@ -136,7 +202,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'What makes Alithea different from other games?',
-    answer: 'Alithea isn\'t about luck or pay-to-win. It\'s pure skill. Your memory performance is verifiable on-chain, creating a transparent leaderboard where only ability matters. Plus, the 8 game modes train different types of memory — spatial, visual, auditory, and sequential.',
+    answer: 'Alithea is a memory training game built on the Sui blockchain. Train your memory across 10 unique game modes, prove your skill on-chain, and earn rewards. Named after the Greek concept of Aletheia — truth, unveiling — because memory is about revealing what\'s hidden.',
   },
   {
     question: 'What is the $ALITHEA token?',
@@ -190,7 +256,7 @@ function Header({ onGoHome }: { onGoHome: () => void }) {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass py-3' : 'py-5'}`}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <button onClick={onGoHome} className="flex items-center gap-3 group">
-          <span className="text-3xl group-hover:scale-110 transition-transform">🧠</span>
+          <Brain className="w-7 h-7 text-purple-400 group-hover:scale-110 transition-transform" />
           <span className="font-sf-display text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
             Alithea
           </span>
@@ -201,6 +267,9 @@ function Header({ onGoHome }: { onGoHome: () => void }) {
           </a>
           <a href="#about" className="hidden md:block text-sm text-white/60 hover:text-white transition-colors">
             About
+          </a>
+          <a href="#guides" className="hidden md:block text-sm text-white/60 hover:text-white transition-colors">
+            Guides
           </a>
           <a href="#faq" className="hidden md:block text-sm text-white/60 hover:text-white transition-colors">
             FAQ
@@ -233,8 +302,8 @@ function HeroSection({ onPlay }: { onPlay: () => void }) {
 
         {/* Subheadline */}
         <p className="font-sf-text text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 animate-fade-in-up delay-100">
-          Train your memory across 8 game modes. Prove your skill on-chain. 
-          Earn rewards for being sharp. The arena is open.
+          Ten memory games that train one superpower: remembering. Play free,
+          prove your skill on-chain, and climb the leaderboard.
         </p>
 
         {/* CTA Buttons */}
@@ -263,7 +332,7 @@ function HeroSection({ onPlay }: { onPlay: () => void }) {
         {/* Stats */}
         <div className="flex items-center justify-center gap-8 md:gap-12 mt-16 animate-fade-in-up delay-300">
           <div className="text-center">
-            <div className="font-sf-display text-2xl md:text-3xl font-bold text-white">8</div>
+            <div className="font-sf-display text-2xl md:text-3xl font-bold text-white">10</div>
             <div className="text-sm text-white/40">Game Modes</div>
           </div>
           <div className="w-px h-12 bg-white/10" />
@@ -303,7 +372,7 @@ function AboutSection() {
             </span>
           </h2>
           <p className="font-sf-text text-lg text-white/50 max-w-2xl mx-auto">
-            Eight distinct game modes, each training a different aspect of your memory. 
+            Ten distinct game modes, each training a different aspect of your memory. 
             From spatial awareness to sequential recall — master them all.
           </p>
         </div>
@@ -316,7 +385,7 @@ function AboutSection() {
               style={{ animationDelay: `${i * 50}ms` }}
             >
               <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${mode.color} flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform`}>
-                {mode.icon}
+                <mode.icon className="w-7 h-7 text-white" />
               </div>
               <h3 className="font-sf-display text-lg font-semibold text-white mb-2">
                 {mode.name}
@@ -340,25 +409,25 @@ function HowItWorks() {
       number: '01',
       title: 'Connect Your Wallet',
       description: 'Link your Sui wallet in one click. No downloads, no installations. Just connect and play.',
-      icon: '🔗',
+      icon: Link,
     },
     {
       number: '02',
       title: 'Choose Your Challenge',
-      description: 'Pick from 8 game modes and 3 difficulty tiers. Whether you have 2 minutes or 2 hours, there\'s a challenge waiting.',
-      icon: '🎮',
+      description: 'Pick from 10 game modes and 3 difficulty tiers. Whether you have 2 minutes or 2 hours, there\'s a challenge waiting.',
+      icon: Gamepad2,
     },
     {
       number: '03',
       title: 'Train & Score',
       description: 'Your performance is tracked in real-time. Every move, every second counts toward your final score.',
-      icon: '📊',
+      icon: BarChart3,
     },
     {
       number: '04',
       title: 'Earn On-Chain',
       description: 'Top scores earn $ALITHEA tokens and Soulbound achievements. Your memory mastery, permanently recorded.',
-      icon: '⛓️',
+      icon: Blocks,
     },
   ];
 
@@ -386,7 +455,7 @@ function HowItWorks() {
                 <div className="hidden lg:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-white/20 to-transparent" />
               )}
               <div className="card-apple p-6 h-full">
-                <div className="text-4xl mb-4">{step.icon}</div>
+                <step.icon className="w-9 h-9 mb-4 text-purple-400" />
                 <div className="font-sf-display text-sm text-purple-400 font-medium mb-2">
                   {step.number}
                 </div>
@@ -428,7 +497,7 @@ function TokenSection() {
             <div className="space-y-4">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🏆</span>
+                  <Trophy className="w-5 h-5 text-purple-300" />
                 </div>
                 <div>
                   <h4 className="font-sf-display text-white font-semibold mb-1">$ALITHEA Token</h4>
@@ -438,7 +507,7 @@ function TokenSection() {
 
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🏅</span>
+                  <Medal className="w-5 h-5 text-pink-300" />
                 </div>
                 <div>
                   <h4 className="font-sf-display text-white font-semibold mb-1">Soulbound Achievements</h4>
@@ -448,7 +517,7 @@ function TokenSection() {
 
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">⚔️</span>
+                  <Swords className="w-5 h-5 text-cyan-300" />
                 </div>
                 <div>
                   <h4 className="font-sf-display text-white font-semibold mb-1">Tournaments</h4>
@@ -466,10 +535,10 @@ function TokenSection() {
               <div className="mb-6">
                 <h4 className="font-sf-display text-sm text-white/40 uppercase tracking-wider mb-4">Top Memory Champions</h4>
                 {[
-                  { rank: 1, name: '0x7a3f...8d2e', score: '2,847', streak: '🔥 12' },
-                  { rank: 2, name: '0x9c1b...4f5a', score: '2,634', streak: '🔥 8' },
-                  { rank: 3, name: '0x2e8d...7c1f', score: '2,421', streak: '🔥 5' },
-                  { rank: 4, name: '0x5f4a...9b3c', score: '2,198', streak: '🔥 3' },
+                  { rank: 1, name: '0x7a3f...8d2e', score: '2,847', streak: 12 },
+                  { rank: 2, name: '0x9c1b...4f5a', score: '2,634', streak: 8 },
+                  { rank: 3, name: '0x2e8d...7c1f', score: '2,421', streak: 5 },
+                  { rank: 4, name: '0x5f4a...9b3c', score: '2,198', streak: 3 },
                 ].map((player) => (
                   <div key={player.rank} className="flex items-center gap-4 py-3 border-b border-white/5 last:border-0">
                     <span className={`font-sf-display text-lg font-bold ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : player.rank === 3 ? 'text-orange-400' : 'text-white/40'}`}>
@@ -477,7 +546,7 @@ function TokenSection() {
                     </span>
                     <span className="font-mono text-sm text-white/60 flex-1">{player.name}</span>
                     <span className="font-sf-display font-semibold text-white">{player.score}</span>
-                    <span className="text-sm">{player.streak}</span>
+                    <span className="inline-flex items-center gap-1 text-sm"><Flame className="w-4 h-4 text-orange-400" /> {player.streak}</span>
                   </div>
                 ))}
               </div>
@@ -555,7 +624,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">🧠</span>
+            <Brain className="w-6 h-6 text-purple-400" />
             <span className="font-sf-display text-lg font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Alithea
             </span>
@@ -575,7 +644,7 @@ function Footer() {
           </div>
 
           <div className="text-sm text-white/30">
-            © 2024 Alithea. Built with ❤️ on Sui.
+            © 2024 Alithea. Built with <Heart className="inline w-4 h-4 text-pink-500" /> on Sui.
           </div>
         </div>
       </div>
@@ -584,12 +653,66 @@ function Footer() {
 }
 
 // ============ MAIN PAGE ============
+// ============ BEGINNER GUIDES SECTION ============
+
+function GuideSection({ onOpenGuide }: { onOpenGuide: (id: string) => void }) {
+  return (
+    <section id="guides" className="py-24 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="font-sf-display text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-white/40">Beginner</span>{' '}
+            <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+              Guides
+            </span>
+          </h2>
+          <p className="font-sf-text text-lg text-white/50 max-w-2xl mx-auto">
+            New here? Every game has a step-by-step guide — refreshed as the
+            arena evolves. Start with Spin the Cup, the friendliest way in.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {GUIDES.map((guide) => {
+            const mode = GAME_MODES.find((m) => m.id === guide.id);
+            if (!mode) return null;
+            return (
+              <div key={guide.id} className="card-apple p-6 flex items-start gap-4">
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${mode.color} flex items-center justify-center flex-shrink-0`}>
+                  <mode.icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-sf-display text-subheading font-semibold text-white mb-1">
+                    {guide.title}
+                  </h3>
+                  <p className="font-sf-text text-caption text-white/40 mb-3">
+                    {guide.beginnerTips[0]}
+                  </p>
+                  <button
+                    onClick={() => onOpenGuide(guide.id)}
+                    className="btn-apple-secondary !px-4 !py-2 text-sm flex items-center gap-2"
+                  >
+                    <BookOpen className="w-4 h-4" /> Read Guide
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============ MAIN PAGE ============
 
 export default function Home() {
+
   const [gameMode, setGameMode] = useState<GameMode>('home');
   const [subMode, setSubMode] = useState<SubMode>(null);
   const [result, setResult] = useState<GameResult | null>(null);
   const [showLanding, setShowLanding] = useState(true);
+  const [guideMode, setGuideMode] = useState<string | null>(null);
   const gameRef = useRef<HTMLDivElement>(null);
 
   const handleSelectMode = useCallback((mode: GameMode) => {
@@ -642,6 +765,7 @@ export default function Home() {
         <>
           <HeroSection onPlay={handleStartPlaying} />
           <AboutSection />
+          <GuideSection onOpenGuide={setGuideMode} />
           <HowItWorks />
           <TokenSection />
           <FAQSection />
@@ -660,7 +784,7 @@ export default function Home() {
                   onClick={handleGoHome}
                   className="btn-apple-ghost mb-8 flex items-center gap-2"
                 >
-                  ← Back to Home
+                  <ArrowLeft className="w-4 h-4" /> Back to Home
                 </button>
 
                 <div className="text-center mb-12">
@@ -668,7 +792,7 @@ export default function Home() {
                     Choose Your Challenge
                   </h1>
                   <p className="font-sf-text text-lg text-white/50 max-w-lg mx-auto">
-                    Eight ways to test your memory. Which will you master?
+                    Ten ways to test your memory. Which will you master?
                   </p>
                 </div>
 
@@ -680,7 +804,7 @@ export default function Home() {
                       className="group card-apple p-5 text-left hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                     >
                       <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${mode.color} flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform`}>
-                        {mode.icon}
+                        <mode.icon className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="font-sf-display text-subheading font-semibold text-white mb-1">
                         {mode.name}
@@ -701,12 +825,12 @@ export default function Home() {
                   onClick={() => handleSelectMode('home')}
                   className="btn-apple-ghost mb-6 flex items-center gap-2"
                 >
-                  ← Back to Games
+                  <ArrowLeft className="w-4 h-4" /> Back to Games
                 </button>
 
                 <div className="text-center mb-8">
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${currentMode.color} flex items-center justify-center text-4xl mx-auto mb-4`}>
-                    {currentMode.icon}
+                    <currentMode.icon className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="font-sf-display text-display-xl font-bold text-white mb-2">
                     {currentMode.name}
@@ -715,6 +839,13 @@ export default function Home() {
                     {currentMode.description}
                   </p>
                 </div>
+
+                <button
+                  onClick={() => setGuideMode(currentMode.id)}
+                  className="w-full btn-apple-secondary mb-3 flex items-center justify-center gap-2"
+                >
+                  <BookOpen className="w-4 h-4" /> How to Play
+                </button>
 
                 <div className="space-y-3">
                   {currentMode.subModes.map((sm) => (
@@ -731,7 +862,7 @@ export default function Home() {
                           {sm.desc}
                         </div>
                       </div>
-                      <span className="text-white/30 text-xl">→</span>
+                      <ChevronRight className="w-5 h-5 text-white/30" />
                     </button>
                   ))}
                 </div>
@@ -745,7 +876,7 @@ export default function Home() {
                   onClick={handlePlayAgain}
                   className="btn-apple-ghost mb-6 flex items-center gap-2"
                 >
-                  ← Change Mode
+                  <ArrowLeft className="w-4 h-4" /> Change Mode
                 </button>
 
                 {gameMode === 'classic' && (
@@ -796,6 +927,18 @@ export default function Home() {
                     onComplete={handleGameComplete}
                   />
                 )}
+                {gameMode === 'spin' && (
+                  <SpinTheCup
+                    difficulty={subMode as 'easy' | 'hard'}
+                    onComplete={handleGameComplete}
+                  />
+                )}
+                {gameMode === 'ship' && (
+                  <Spaceship
+                    routeLength={subMode === 'medium' ? 5 : subMode === 'hard' ? 7 : 3}
+                    onComplete={handleGameComplete}
+                  />
+                )}
               </div>
             )}
 
@@ -803,7 +946,7 @@ export default function Home() {
             {result && (
               <div className="w-full max-w-md mx-auto text-center animate-slide-up">
                 <div className="card-apple p-8">
-                  <div className="text-6xl mb-4">🎉</div>
+                  <PartyPopper className="w-16 h-16 mx-auto mb-4 text-purple-400" />
                   <h2 className="font-sf-display text-display-xl font-bold text-white mb-2">
                     Game Complete!
                   </h2>
@@ -858,6 +1001,10 @@ export default function Home() {
           </div>
         </div>
       )}
+      {guideMode && (
+        <GameGuide guide={GUIDES.find((g) => g.id === guideMode)} onClose={() => setGuideMode(null)} />
+      )}
+
     </div>
   );
 }
@@ -874,33 +1021,33 @@ function formatTime(ms: number): string {
 function ScoreRating({ score }: { score: number }) {
   let rating: string;
   let color: string;
-  let emoji: string;
+  let RatingIcon: LucideIcon;
 
   if (score >= 2000) {
     rating = 'Legendary';
     color = 'text-yellow-400';
-    emoji = '👑';
+    RatingIcon = Crown;
   } else if (score >= 1500) {
     rating = 'Excellent';
     color = 'text-green-400';
-    emoji = '🌟';
+    RatingIcon = Sparkles;
   } else if (score >= 1000) {
     rating = 'Great';
     color = 'text-purple-400';
-    emoji = '🔥';
+    RatingIcon = Flame;
   } else if (score >= 500) {
     rating = 'Good';
     color = 'text-cyan-400';
-    emoji = '💪';
+    RatingIcon = Dumbbell;
   } else {
     rating = 'Keep Trying';
     color = 'text-white/50';
-    emoji = '🎯';
+    RatingIcon = Target;
   }
 
   return (
     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5">
-      <span>{emoji}</span>
+      <RatingIcon className="w-5 h-5" />
       <span className={`font-sf-display text-subheading font-semibold ${color}`}>
         {rating}
       </span>

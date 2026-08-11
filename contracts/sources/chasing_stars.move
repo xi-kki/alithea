@@ -117,7 +117,7 @@ module alithea::chasing_stars {
 
             // Add more stars
             let total_cells = get_total_cells(game.grid_size);
-            let new_star_count = vector::length(&game.star_positions) + 1;
+            let mut new_star_count = vector::length(&game.star_positions) + 1;
             let max_stars = (total_cells * 6) / 10; // Max 60% of cells
             if (new_star_count > max_stars) {
                 new_star_count = max_stars;
